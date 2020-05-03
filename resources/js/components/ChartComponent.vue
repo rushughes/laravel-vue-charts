@@ -1,22 +1,6 @@
-<template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script>
 
-  import {Line} from 'vue-chartjs';
+  import { Line } from 'vue-chartjs';
 
     export default {
       name: "ChartComponent",
@@ -27,19 +11,47 @@
             years: [],
             labels: [],
             prices: [],
-            data: ''
+            data: []
         }
       },
       methods: {
         getProducts() {
-          axios.get(this.url).then((response)=>{
-            console.log(response.data);
+          axios.get(
+            this.url,
+            {
+              responseType: 'json',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              }
+            },
+          ).then((response)=>{
+            console.log(response);
+            this.data = response.data;
+
             if (this.data) {
-              this.data.ForEach(element => {
+              for (var i = 0; i < this.data.length; i++) {
+                var element = this.data[i];
                 this.labels.push(element.name);
                 this.years.push(element.year);
-                this.price.push(element.price);
+                this.prices.push(element.price);
+              }
+
+              this.renderChart({
+                labels: this.years,
+                datasets: [
+                  {
+                    label: 'Sales',
+                    backgroundColor: '#f87979',
+                    data: this.prices
+                  }
+                ]
+              }, {
+                responsive: true,
+                maintainAspectRatio: false
               });
+            } else {
+              console.log("No data");
             }
           });
         }
