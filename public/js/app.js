@@ -2006,8 +2006,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getProducts: function getProducts() {
+      var _this = this;
+
       axios.get(this.url).then(function (response) {
         console.log(response.data);
+
+        if (_this.data) {
+          _this.data.ForEach(function (element) {
+            _this.labels.push(element.name);
+
+            _this.years.push(element.year);
+
+            _this.price.push(element.price);
+          });
+        }
       });
     }
   },
