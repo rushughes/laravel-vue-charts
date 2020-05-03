@@ -14,7 +14,24 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <form action ="">
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="number" id="year" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" id="price" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary">Create Product</button>
+                      </div>
+                    </form>
+                    
                 </div>
             </div>
         </div>
