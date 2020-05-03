@@ -1,5 +1,7 @@
 ## Commands
 * `laravel new laravel-vue-charts`
+* ` php artisan make:model Product -m`
+* `php artisan migrate`
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
