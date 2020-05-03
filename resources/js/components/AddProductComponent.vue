@@ -7,18 +7,18 @@
 
                     <div class="card-body">
 
-                          <form action ="">
+                          <form @submit.prevent="createProduct">
                             <div class="form-group">
                               <label for="name">Name</label>
-                              <input type="text" id="name" class="form-control" />
+                              <input v-model="product.name" type="text" id="name" class="form-control" />
                             </div>
                             <div class="form-group">
                               <label for="year">Year</label>
-                              <input type="number" id="year" class="form-control" />
+                              <input v-model="product.year" type="number" id="year" class="form-control" />
                             </div>
                             <div class="form-group">
                               <label for="price">Price</label>
-                              <input type="number" id="price" class="form-control" />
+                              <input v-model="product.price" type="number" id="price" class="form-control" />
                             </div>
                             <div class="form-group">
                               <button class="btn btn-primary">Create Product</button>
@@ -34,8 +34,21 @@
 <script>
     export default {
         name: "AddProductComponent",
+        data() {
+          return {
+            product: {}
+          }
+        },
         mounted() {
             console.log('Component mounted.')
+        },
+        methods: {
+          createProduct() {
+            axios.post('/products', this.product).then((response)=> {
+                console.log(this.product);
+                window.location.reload();
+            });
+          }
         }
     }
 </script>

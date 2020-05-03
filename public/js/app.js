@@ -1943,8 +1943,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddProductComponent",
+  data: function data() {
+    return {
+      product: {}
+    };
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    createProduct: function createProduct() {
+      var _this = this;
+
+      axios.post('/products', this.product).then(function (response) {
+        console.log(_this.product);
+        window.location.reload();
+      });
+    }
   }
 });
 
@@ -37627,27 +37642,47 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("Add Products")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("form", { attrs: { action: "" } }, [
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("Add Products")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.createProduct($event)
+                  }
+                }
+              },
+              [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.product.name,
+                        expression: "product.name"
+                      }
+                    ],
                     staticClass: "form-control",
-                    attrs: { type: "text", id: "name" }
+                    attrs: { type: "text", id: "name" },
+                    domProps: { value: _vm.product.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.product, "name", $event.target.value)
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -37655,8 +37690,25 @@ var staticRenderFns = [
                   _c("label", { attrs: { for: "year" } }, [_vm._v("Year")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.product.year,
+                        expression: "product.year"
+                      }
+                    ],
                     staticClass: "form-control",
-                    attrs: { type: "number", id: "year" }
+                    attrs: { type: "number", id: "year" },
+                    domProps: { value: _vm.product.year },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.product, "year", $event.target.value)
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -37664,20 +37716,45 @@ var staticRenderFns = [
                   _c("label", { attrs: { for: "price" } }, [_vm._v("Price")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.product.price,
+                        expression: "product.price"
+                      }
+                    ],
                     staticClass: "form-control",
-                    attrs: { type: "number", id: "price" }
+                    attrs: { type: "number", id: "price" },
+                    domProps: { value: _vm.product.price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.product, "price", $event.target.value)
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("button", { staticClass: "btn btn-primary" }, [
-                    _vm._v("Create Product")
-                  ])
-                ])
-              ])
-            ])
+                _vm._m(0)
+              ]
+            )
           ])
         ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("button", { staticClass: "btn btn-primary" }, [
+        _vm._v("Create Product")
       ])
     ])
   }
